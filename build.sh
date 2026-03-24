@@ -2,7 +2,7 @@
 set -e
 
 VERSION=$(grep '"version"' manifest.json | sed 's/.*"\([0-9][0-9.]*\)".*/\1/')
-OUTPUT="jax-extension-v${VERSION}.zip"
+OUTPUT="poke-ai-v${VERSION}.zip"
 
 rm -f "$OUTPUT"
 

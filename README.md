@@ -1,7 +1,5 @@
 # Poke AI
 
-![Poke AI Popup](assets/Screenshot_2026-03-04_at_21.11.40-85aa2fba-e716-48bb-a8fd-805a13fb49ac.png)
-
 Chrome extension that launches Cursor agents from Jira tickets — via the cloud API or directly in your local Cursor IDE.
 
 ## What it does
