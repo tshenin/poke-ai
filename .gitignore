@@ -1,0 +1,30 @@
+# OS / Editor
+.DS_Store
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment / secrets
+.env
+.env.*
+.npmrc
+
+# Dependencies
+node_modules/
+
+# Build / cache
+dist/
+build/
+coverage/
+.cache/
+
+# Misc
+*.swp
+*.swo
+
+# Build artifacts
+*.zip

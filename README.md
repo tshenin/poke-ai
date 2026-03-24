@@ -1,52 +1,60 @@
 # Poke AI
 
-An open-source Chrome extension that lets you annotate any webpage and send those annotations to an AI agent — using your own API key.
+![Poke AI Popup](assets/Screenshot_2026-03-04_at_21.11.40-85aa2fba-e716-48bb-a8fd-805a13fb49ac.png)
+
+Chrome extension that launches Cursor agents from Jira tickets — via the cloud API or directly in your local Cursor IDE.
 
 ## What it does
 
-Poke AI adds an annotation toolbar to any site you visit. You highlight elements, draw boxes, or leave text notes directly on the page. When you're ready, Poke AI packages up your annotations and sends them to an AI model of your choice to act on them — writing code, filling forms, summarizing content, automating tasks, or anything else you can describe.
+- Works on Jira issue pages.
+- Shows Jira ticket key and title in the popup.
+- Two ways to run an agent:
+  - **Run Cloud Agent** — calls the Cursor background-agent API (requires API key).
+  - **Open in Cursor** — opens your local Cursor IDE with the ticket context pre-filled as a prompt (no API key needed).
+- Supports prompt resolution by repository for cloud agents:
+  - custom prompt for repo (if saved),
+  - predefined prompt for repo,
+  - super-default prompt fallback.
 
-## Features
+### On-Site Annotation (New)
 
-- **Visual annotation tool** — point-and-click selection, bounding boxes, and text notes on any webpage
-- **Bring your own API key** — works with Claude (Anthropic), OpenAI, and other compatible providers
-- **Run locally or in the cloud** — send annotations to a local agent or a hosted endpoint
-- **Privacy first** — your API key never leaves your browser; all requests go directly from the extension to the AI provider
-- **Open source** — inspect, fork, and extend everything
+Annotate UI elements directly on platform pages:
 
-## How it works
+1. Navigate to a supported platform page.
+2. Click the extension icon and start **Annotation Mode**.
+3. Hover and click any element to select it.
+4. Add a note describing the change needed (e.g., "Change this icon" or "Fix button alignment").
+5. Run the agent directly from the platform page, or annotations will be included when running from a Jira ticket.
 
-1. Click the Poke AI icon to open the annotation toolbar
-2. Select elements or draw annotations on the page
-3. Describe what you want the AI to do
-4. Hit send — your annotations + prompt go to your chosen AI provider
-5. The response is shown inline or applied to the page
+## Setup
+
+1. Open `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked** and select this project directory.
+4. (Optional) Open extension **Settings** and configure:
+   - Cursor API key (needed only for cloud agents),
+   - target repository URL,
+   - base branch.
+
+For best results with private npm dependencies, add `GITHUB_TOKEN` in Cursor User Secrets.
+
+## Usage
+
+1. Open a Jira issue page.
+2. Click the extension icon.
+3. Verify ticket key/title in popup.
+4. Click **Run Cloud Agent** to start a background agent, or **Open in Cursor** to launch your local IDE with the ticket prompt.
+
+## Project structure
+
+- `manifest.json` - Chrome extension manifest (MV3).
+- `background.js` - service worker, Cursor API integration, prompt resolution.
+- `content.js` - Jira issue data extraction (ticket key/title/description).
+- `annotation.js` - on-site annotation for platform pages.
+- `popup/` - popup UI and run action.
+- `settings/` - API key/repository settings and advanced prompt configuration.
+- `icons/` - extension icons.
 
 ## Roadmap
 
-- [ ] Core annotation engine (element picker, bounding box, text notes)
-- [ ] Settings panel for API key management
-- [ ] Claude (Anthropic) integration
-- [ ] OpenAI / compatible API integration
-- [ ] Local agent mode (run against Ollama or similar)
-- [ ] Annotation export (JSON / screenshot)
-- [ ] Replay & share annotation sessions
-
-## Getting started (development)
-
-```bash
-git clone https://github.com/tshenin/poke-ai.git
-cd poke-ai
-# Load the extension in Chrome:
-# 1. Go to chrome://extensions
-# 2. Enable Developer mode
-# 3. Click "Load unpacked" and select this folder
-```
-
-## Contributing
-
-Contributions are welcome. Open an issue to discuss ideas or submit a pull request.
-
-## License
-
-MIT
+See [ROADMAP.md](ROADMAP.md) for planned features.

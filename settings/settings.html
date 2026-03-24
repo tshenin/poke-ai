@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poke AI Settings</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9fafb;
+    }
+    h1 {
+      font-size: 24px;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .notice {
+      margin-bottom: 20px;
+      padding: 12px;
+      border-radius: 6px;
+      background: #e0f2fe;
+      color: #0c4a6e;
+      font-size: 13px;
+      line-height: 1.4;
+      border: 1px solid #bae6fd;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    input[type="password"]:focus,
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    select {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      background: white;
+      cursor: pointer;
+    }
+    select:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    select:disabled {
+      background: #f3f4f6;
+      cursor: not-allowed;
+    }
+    .model-select-wrapper {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .icon-btn {
+      padding: 8px 12px;
+      background: #e5e7eb;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .icon-btn:hover {
+      background: #d1d5db;
+    }
+    .icon-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .model-hint {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    button {
+      padding: 10px 20px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+    .advanced-toggle {
+      margin-top: 24px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .advanced-toggle-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #312e81;
+    }
+    .advanced-toggle-subtitle {
+      font-size: 12px;
+      color: #4338ca;
+      margin-top: 2px;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #9ca3af;
+      transition: .2s;
+      border-radius: 999px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #4f46e5;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    .advanced-panel {
+      margin-bottom: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+    }
+    .advanced-panel[hidden] {
+      display: none;
+    }
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      resize: vertical;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.4;
+      padding: 10px 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    .placeholder-guide {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #4b5563;
+      line-height: 1.4;
+    }
+    .placeholder-guide code {
+      background: #f3f4f6;
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .secondary {
+      background: #4b5563;
+    }
+    .secondary:hover {
+      background: #374151;
+    }
+    .message {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .message.success {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .message.error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .last-saved {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <h1>🤖 Poke AI Settings</h1>
+  <p class="subtitle">Configure your Cursor API key to enable agent triggers</p>
+
+  <div class="notice">
+    Add a GitHub token to Cursor User Secrets for best results when agents install npm packages.
+    This is a one-time setup in Cursor.
+  </div>
+  
+  <div class="form-group">
+    <label for="apiKey">Cursor API Key</label>
+    <input type="password" id="apiKey" placeholder="Enter your Cursor API key">
+  </div>
+
+  <div class="form-group">
+    <label for="repositoryUrl">Repository URL</label>
+    <input type="text" id="repositoryUrl" placeholder="https://github.com/org/repo">
+  </div>
+
+  <div class="form-group">
+    <label for="baseRef">Base Branch</label>
+    <input type="text" id="baseRef" placeholder="main">
+  </div>
+
+  <div class="form-group">
+    <label for="modelSelect">Cloud Agent Model</label>
+    <div class="model-select-wrapper">
+      <select id="modelSelect" disabled>
+        <option value="">Loading models...</option>
+      </select>
+      <button id="refreshModelsBtn" class="icon-btn" title="Refresh models">↻</button>
+    </div>
+    <div class="model-hint">Select the AI model for cloud agent runs. Requires API key.</div>
+  </div>
+
+  <div class="advanced-toggle">
+    <div>
+      <div class="advanced-toggle-title">Advanced settings</div>
+      <div class="advanced-toggle-subtitle">Enable custom prompt template</div>
+    </div>
+    <label class="switch" for="advancedToggle">
+      <input type="checkbox" id="advancedToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div id="advancedPanel" class="advanced-panel" hidden>
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="customPromptTemplate">Custom Prompt Template</label>
+      <textarea id="customPromptTemplate" placeholder="Write your custom prompt using placeholders..."></textarea>
+      <div class="placeholder-guide">
+        Available placeholders: <code>{{ticket}}</code>, <code>{{title}}</code>, <code>{{description}}</code>.<br>
+        This field shows custom prompt for the repository if set, otherwise repo default, otherwise super default.<br>
+        Example: <code>Ticket: {{ticket}}</code><br>
+        Custom prompts are saved per repository (<code>owner/repo</code>).
+      </div>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <button id="saveBtn">Save</button>
+    <button id="testConnectionBtn" class="secondary">Test Connection</button>
+  </div>
+  
+  <div id="message" class="message" style="display: none;"></div>
+  <div id="lastSaved" class="last-saved"></div>
+  
+  <script src="settings.js"></script>
+</body>
+</html>

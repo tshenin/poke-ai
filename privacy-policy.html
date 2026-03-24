@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poke AI – Privacy Policy</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --fg: #1a1a1a;
+      --muted: #555;
+      --border: #e0e0e0;
+      --accent: #1a73e8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --fg: #e8e8e8;
+        --muted: #aaa;
+        --border: #333;
+        --accent: #8ab4f8;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.25rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      font-size: 1.15rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    p, li {
+      margin-bottom: 0.5rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">Poke AI &mdash; last updated March 3, 2026</p>
+
+    <h2>What the extension does</h2>
+    <p>
+      Poke AI is a productivity tool that lets engineers launch
+      <a href="https://cursor.com">Cursor</a> background agents directly from Jira tickets.
+      It reads ticket information from the active Jira page and sends it to the Cursor API.
+    </p>
+
+    <h2>Data collected</h2>
+    <p>The extension accesses the following data, all of which stays on your device or is sent only to the Cursor API:</p>
+    <ul>
+      <li><strong>Jira ticket content</strong> &ndash; ticket key, title, and description are read from the currently open Jira page when you trigger an agent.</li>
+      <li><strong>Cursor API key</strong> &ndash; your personal API key is stored locally in Chrome's extension storage (<code>chrome.storage.local</code>).</li>
+      <li><strong>Settings</strong> &ndash; repository URL, branch/ref, and custom prompt templates are stored locally in Chrome's extension storage.</li>
+    </ul>
+
+    <h2>How data is used</h2>
+    <ul>
+      <li>Jira ticket data is combined with your prompt template and sent to <code>api.cursor.com</code> to start a background agent.</li>
+      <li>Your API key is sent to <code>api.cursor.com</code> as an authentication credential.</li>
+      <li>All settings are used exclusively to configure agent requests. Nothing is used for analytics, advertising, or profiling.</li>
+    </ul>
+
+    <h2>Third-party services</h2>
+    <p>
+      The extension communicates only with <strong>api.cursor.com</strong>.
+      No data is sent to any other third-party service. There are no analytics, tracking pixels, or telemetry of any kind.
+    </p>
+
+    <h2>Data storage &amp; retention</h2>
+    <ul>
+      <li>All data is stored locally on your device using <code>chrome.storage.local</code>.</li>
+      <li>No data is stored on external servers controlled by the extension developer.</li>
+      <li>Uninstalling the extension removes all stored data.</li>
+    </ul>
+
+    <h2>Data sharing</h2>
+    <p>
+      Your data is <strong>not sold, shared, or transferred</strong> to any third party, except as described above (Cursor API for agent execution).
+    </p>
+
+    <h2>Permissions explained</h2>
+    <ul>
+      <li><strong>storage</strong> &ndash; to persist your API key and settings locally.</li>
+      <li><strong>activeTab</strong> &ndash; to read ticket information from the currently active Jira tab when you click the extension.</li>
+      <li><strong>host_permissions (*.atlassian.net)</strong> &ndash; to run the content script that extracts Jira ticket data.</li>
+      <li><strong>host_permissions (api.cursor.com)</strong> &ndash; to send agent launch requests to the Cursor API.</li>
+    </ul>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy is updated, the updated date at the top will be changed. Since this is an internal tool, changes will be communicated through normal team channels.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      For questions about this extension or its data practices, reach out to the maintainer.
+    </p>
+
+    <hr>
+    <p class="footer">This privacy policy applies to the Poke AI Chrome extension only.</p>
+  </main>
+</body>
+</html>
